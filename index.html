@@ -226,12 +226,29 @@ margin: 0 0 18px 0;
 letter-spacing: -0.5px;
 }
 .hero h1 span { color: var(--teal-bright); }
+.hero-bob-row {
+display: flex;
+align-items: flex-start;
+gap: 16px;
+margin: 0 0 26px 0;
+}
+.hero-bob-avatar {
+flex: none;
+filter: drop-shadow(0 4px 14px rgba(0,0,0,0.35));
+}
+.hero-bob-avatar .bob-rig { transform-origin: 65px 120px; animation: bobIdle 3.2s ease-in-out infinite; }
+.hero-bob-avatar .bob-eye { transform-origin: center; animation: bobBlink 4.5s ease-in-out infinite; }
+.hero-bob-avatar .bob-eye.right { animation-delay: .05s; }
+.hero-bob-avatar .bob-mouth-talk { display: none; }
 .hero p.sub {
 color: var(--light-text);
 font-size: 16px;
 line-height: 1.6;
-max-width: 480px;
-margin: 0 0 26px 0;
+max-width: 420px;
+margin: 6px 0 0 0;
+}
+@media (max-width: 480px) {
+.hero-bob-row { gap: 12px; }
 }
 .trust-row {
 display: flex;
@@ -297,6 +314,21 @@ display: flex; align-items: center; justify-content: center;
 font-size: 15px; font-weight: 800; color: var(--bg-dark);
 box-shadow: 0 0 16px rgba(33,181,156,0.5);
 }
+.chat-head-left .avatar.bob-avatar {
+background: #0b3d5c;
+padding: 3px;
+overflow: visible;
+}
+.bob-rig { transform-origin: 65px 120px; animation: bobIdle 3.2s ease-in-out infinite; }
+@keyframes bobIdle { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-3px) rotate(-1deg); } }
+.bob-eye { transform-origin: center; animation: bobBlink 4.5s ease-in-out infinite; }
+.bob-eye.right { animation-delay: .05s; }
+@keyframes bobBlink { 0%,92%,100% { transform: scaleY(1); } 95% { transform: scaleY(0.08); } }
+.avatar.bob-avatar .bob-mouth-talk { display: none; }
+.avatar.bob-avatar.talking .bob-mouth-idle { display: none; }
+.avatar.bob-avatar.talking .bob-mouth-talk { display: block; transform-origin: 65px 92px; animation: bobTalk .32s steps(1) infinite; }
+@keyframes bobTalk { 0% { transform: scaleY(0.4); } 33% { transform: scaleY(1.15); } 66% { transform: scaleY(0.7); } 100% { transform: scaleY(0.4); } }
+.avatar.bob-avatar.talking .bob-rig { animation-duration: 1.6s; }
 .chat-head-left .name { color: #fff; font-size: 15px; font-weight: 700; }
 .chat-head-left .status { color: var(--teal-bright); font-size: 10.5px; font-family: var(--mono); }
 .voice-toggle {
@@ -619,6 +651,37 @@ font-family: var(--mono);
 
 <div id="siteView">
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<g id="capt-bob-figure">
+<g class="bob-rig">
+<circle cx="65" cy="66" r="58" fill="#fdf6e8"/>
+<path d="M30 130 Q65 105 100 130 L100 140 L30 140 Z" fill="#0b3d5c"/>
+<rect x="55" y="112" width="20" height="14" fill="#ffffff"/>
+<rect x="57" y="88" width="16" height="16" rx="6" fill="#f2c49b"/>
+<circle cx="65" cy="70" r="34" fill="#f2c49b"/>
+<circle cx="33" cy="72" r="6" fill="#f2c49b"/>
+<circle cx="97" cy="72" r="6" fill="#f2c49b"/>
+<path d="M38 76 Q40 108 65 110 Q90 108 92 76 Q92 96 65 100 Q38 96 38 76 Z" fill="#ffffff"/>
+<path d="M48 82 Q65 90 82 82 Q65 86 48 82 Z" fill="#ffffff"/>
+<circle cx="47" cy="76" r="5" fill="#e0aa79" opacity="0.55"/>
+<circle cx="83" cy="76" r="5" fill="#e0aa79" opacity="0.55"/>
+<g class="bob-eye left"><ellipse cx="52" cy="66" rx="4" ry="5" fill="#173040"/></g>
+<g class="bob-eye right"><ellipse cx="78" cy="66" rx="4" ry="5" fill="#173040"/></g>
+<path d="M46 57 Q52 53 58 57" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M72 57 Q78 53 84 57" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M65 68 Q69 76 65 79 Q61 79 62 76" fill="#e0aa79"/>
+<path class="bob-mouth-idle" d="M56 92 Q65 97 74 92" stroke="#082c42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<ellipse class="bob-mouth-talk" cx="65" cy="92" rx="8" ry="5" fill="#082c42"/>
+<path d="M30 47 Q65 20 100 47 L100 53 L30 53 Z" fill="#0b3d5c"/>
+<rect x="27" y="51" width="76" height="9" rx="4" fill="#082c42"/>
+<circle cx="65" cy="41" r="6.5" fill="#e0a326"/>
+<path d="M60 41 l3 3.5 l5.5 -6.5" stroke="#082c42" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</defs>
+</svg>
+
 <nav class="nav">
 <div class="brand">
 <span class="dot"></span>
@@ -636,7 +699,10 @@ font-family: var(--mono);
 <div>
 <div class="eyebrow">Talk to us: Text/Voice</div>
 <h1>Chat with Capt. Bob about Bass Boats — Always Free</h1>
+<div class="hero-bob-row">
+<svg class="hero-bob-avatar" viewBox="0 0 130 140" width="92" height="99"><use href="#capt-bob-figure"></use></svg>
 <p class="sub">Tell Capt. Bob what you're looking for — hull material, horsepower, budget, and timeline — and he'll connect you with the right local dealer.</p>
+</div>
 <div class="trust-row">
 <div class="trust-item"><span class="tick">✓</span> always free</div>
 <div class="trust-item"><span class="tick">✓</span> No forms to fill out</div>
@@ -648,7 +714,7 @@ font-family: var(--mono);
 <div class="chat-card">
 <div class="chat-head">
 <div class="chat-head-left">
-<div class="avatar">B</div>
+<svg class="avatar bob-avatar" id="bobAvatar" viewBox="0 0 130 140" width="38" height="38"><use href="#capt-bob-figure"></use></svg>
 <div>
 <div class="name">Capt. Bob — Personal Boat Advisor</div>
 <div class="status">● online now</div>
@@ -1053,11 +1119,14 @@ messages.push({ role: 'user', content: text });
 userTurns++;
 
 const typingEl = addTyping();
+const bobAvatarEl = document.getElementById('bobAvatar');
+if (bobAvatarEl) bobAvatarEl.classList.add('talking');
 let matchReady = false;
 let showBoatTypes = false;
 try {
 const rawReply = await callClaude(messages, activeSystemPrompt);
 typingEl.remove();
+if (bobAvatarEl) bobAvatarEl.classList.remove('talking');
 const lines = rawReply.split('\n');
 while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
 if (lines.length && lines[lines.length - 1].trim() === 'MATCH_READY') {
@@ -1077,6 +1146,7 @@ addBoatPicker();
 }
 } catch (e) {
 typingEl.remove();
+if (bobAvatarEl) bobAvatarEl.classList.remove('talking');
 addBubble('assistant', "Having trouble connecting right now — mind trying again in a moment?");
 }
 sendBtn.disabled = false;
