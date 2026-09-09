@@ -200,7 +200,7 @@ overflow: hidden;
 }
 .hero-grid {
 display: grid;
-grid-template-columns: 1fr;
+grid-template-columns: minmax(0, 1fr);
 gap: 44px;
 max-width: 1280px;
 margin: 0 auto;
@@ -208,7 +208,7 @@ position: relative;
 z-index: 2;
 }
 @media (min-width: 980px) {
-.hero-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+.hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
 }
 .eyebrow {
 color: var(--teal-bright);
@@ -245,10 +245,13 @@ color: var(--light-text);
 font-size: 16px;
 line-height: 1.6;
 max-width: 420px;
+flex: 1 1 auto;
+min-width: 0;
 margin: 6px 0 0 0;
 }
 @media (max-width: 480px) {
 .hero-bob-row { gap: 12px; }
+.hero-bob-avatar { width: 100px; height: 108px; }
 }
 .trust-row {
 display: flex;
@@ -698,16 +701,10 @@ font-family: var(--mono);
 <div class="hero-grid">
 <div>
 <div class="eyebrow">Talk to us: Text/Voice</div>
-<h1>Chat with Capt. Bob about Bass Boats — Always Free</h1>
+<h1>Chat with Capt. Bob about Bass Boats — Free</h1>
 <div class="hero-bob-row">
-<svg class="hero-bob-avatar" viewBox="0 0 130 140" width="92" height="99"><use href="#capt-bob-figure"></use></svg>
-<p class="sub">Tell Capt. Bob what you're looking for — hull material, horsepower, budget, and timeline — and he'll connect you with the right local dealer.</p>
-</div>
-<div class="trust-row">
-<div class="trust-item"><span class="tick">✓</span> always free</div>
-<div class="trust-item"><span class="tick">✓</span> No forms to fill out</div>
-<div class="trust-item"><span class="tick">✓</span> Text or voice</div>
-<div class="trust-item"><span class="tick">✓</span> Closest dealer selling what you're looking for</div>
+<svg class="hero-bob-avatar" viewBox="0 0 130 140" width="150" height="161"><use href="#capt-bob-figure"></use></svg>
+<p class="sub">Tell Capt. Bob what you're looking for and he'll connect you with the right local dealer.</p>
 </div>
 </div>
 
