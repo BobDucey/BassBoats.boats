@@ -664,7 +664,6 @@ font-family: var(--mono);
 <div class="status">● online now</div>
 </div>
 </div>
-<button class="voice-toggle" id="voiceToggle" title="Read replies aloud">🔊 Voice reply: off</button>
 </div>
 
 <div class="chat-body" id="chatBody"><div class="bubble assistant"><span class="bubble-label">Capt. Bob</span>Hi, I'm Capt. Bob, your Personal Boat Advisor for Bass Boats! Before we get started, what's your first name?</div></div>
@@ -1097,12 +1096,6 @@ return String(s == null ? '' : s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&l
 sendBtn.addEventListener('click', () => trySend(chatInput.value));
 chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') trySend(chatInput.value); });
 leadClose.addEventListener('click', () => leadOverlay.classList.remove('show'));
-voiceToggle.addEventListener('click', () => {
-voiceOn = !voiceOn;
-voiceToggle.classList.toggle('on', voiceOn);
-voiceToggle.textContent = voiceOn ? '🔊 Voice reply: on' : '🔊 Voice reply: off';
-if (!voiceOn && 'speechSynthesis' in window) window.speechSynthesis.cancel();
-});
 
 // Web Speech API mic input (best-effort; not all browsers support it)
 const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
