@@ -1186,9 +1186,16 @@ messages.push({ role: 'assistant', content: "Hi, I'm Capt. Bob, your Personal Bo
   if (window.parent === window) return;
   function reportHeight() {
     var card = document.querySelector('.chat-card');
-    if (!card) return;
-    var rect = card.getBoundingClientRect();
-    var bottom = rect.bottom + window.scrollY;
+    var hero = document.querySelector('.hero');
+    var photo = document.querySelector('.hero-photo-wrap');
+    if (!card && !hero) return;
+    var bottom = 0;
+    [card, hero, photo].forEach(function (el) {
+      if (!el) return;
+      var rect = el.getBoundingClientRect();
+      var b = rect.bottom + window.scrollY;
+      if (b > bottom) bottom = b;
+    });
     window.parent.postMessage({ type: 'aibl-chat-height', height: Math.ceil(bottom) }, '*');
   }
   window.addEventListener('load', function () {
@@ -1199,7 +1206,9 @@ messages.push({ role: 'assistant', content: "Hi, I'm Capt. Bob, your Personal Bo
   window.addEventListener('resize', reportHeight);
   if (window.ResizeObserver) {
     var card = document.querySelector('.chat-card');
+    var hero = document.querySelector('.hero');
     if (card) { new ResizeObserver(reportHeight).observe(card); }
+    if (hero) { new ResizeObserver(reportHeight).observe(hero); }
   }
 })();
 </script>
