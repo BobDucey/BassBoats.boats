@@ -1349,4 +1349,26 @@ messages.push({ role: 'assistant', content: "Hi, I'm Capt. Bob, your Personal Bo
 })();
 </script>
 
+<script>
+(function () {
+  if (window.parent === window) return;
+  function reportHeight() {
+    var card = document.querySelector('.chat-card');
+    if (!card) return;
+    var rect = card.getBoundingClientRect();
+    var bottom = rect.bottom + window.scrollY;
+    window.parent.postMessage({ type: 'aibl-chat-height', height: Math.ceil(bottom) }, '*');
+  }
+  window.addEventListener('load', function () {
+    reportHeight();
+    setTimeout(reportHeight, 300);
+    setTimeout(reportHeight, 1000);
+  });
+  window.addEventListener('resize', reportHeight);
+  if (window.ResizeObserver) {
+    var card = document.querySelector('.chat-card');
+    if (card) { new ResizeObserver(reportHeight).observe(card); }
+  }
+})();
+</script>
 </body></html>
